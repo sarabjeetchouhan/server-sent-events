@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSE Connection</title>
+    <link rel="stylesheet" href="/src/styles.css">
+    <script src="/src/app.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <p><a href="/">Home</a></p>
+      <h1>SSE connection</h1>
+      <p>Connect to the Spring Boot SSE endpoint and display notifications.</p>
+
+      <label for="stream-url">SSE URL</label>
+      <input id="stream-url" type="url" value="http://localhost:8080/api/stream">
+      <button id="connect-button" type="button">Connect</button>
+      <button id="disconnect-button" type="button">Disconnect</button>
+      <p id="status">Disconnected</p>
+
+      <h2>Events</h2>
+      <ul id="events"></ul>
+    </main>
+  </body>
+</html>

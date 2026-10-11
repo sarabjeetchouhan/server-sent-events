@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="sse-backend" target="22" />
+      <module name="sse-backend.main" target="22" />
+      <module name="sse-backend.test" target="22" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="sse-backend" options="-parameters" />
+      <module name="sse-backend.main" options="-parameters" />
+      <module name="sse-backend.test" options="-parameters" />
+    </option>
+  </component>
+</project>

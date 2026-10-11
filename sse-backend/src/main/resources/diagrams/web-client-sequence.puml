@@ -1,0 +1,68 @@
+@startuml
+title Web client order creation and SSE updates
+hide footbox
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 13
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 180
+skinparam sequence {
+  ArrowColor #2563EB
+  LifeLineBorderColor #94A3B8
+  ParticipantBorderColor #2563EB
+  ParticipantBackgroundColor #EFF6FF
+  GroupBorderColor #94A3B8
+  GroupBackgroundColor #F8FAFC
+}
+autonumber
+actor "User" as U
+participant "Browser UI" as W
+participant "Node.js web server :5500" as N
+participant "Spring Boot API :8080" as A
+participant "Browser EventSource" as E
+U->W: Open /orders
+W->N: GET page and client assets
+N-->W: order-creation.html, CSS, JavaScript
+U->W: Submit order form
+W->W: Disable submit and show Creating order...
+W->A: POST /api/v1/create-order (JSON)
+alt HTTP or network failure
+A ->x W: Error response or failed request
+W->W: Show dismissible error toast, enable retry
+else Order accepted
+A-->W: 202 Accepted + plain-text orderId
+W->W: Show success toast and reset form
+note over W: Wait 1.8 seconds before navigation
+W->N: GET /orders/status?orderId=...
+N-->W: order-status.html, CSS, JavaScript
+alt Missing orderId in status URL
+W->W: Show error, do not open a stream
+else orderId present
+W->E: Create EventSource, start 20-second timer
+E->A: GET /api/v1/event/order-update?orderId=...
+alt No open event within 20 seconds
+W->E: close()
+W->W: Show connection timeout message
+else Connection opens
+A-->E: Open text/event-stream response
+E-->W: open event, clear connection timer
+loop Each received order-update event
+A-->E: JSON with id, message, timestamp
+E-->W: Dispatch named order-update event
+W->W: Parse JSON and append update card
+U->W: Toggle Show / Hide event details
+end
+opt Connection interrupted before delivery
+E-->W: error with CONNECTING state
+W->W: Start one 20-second reconnection timer
+E->A: Automatically retry SSE request
+note over W,E: Clear timer on open, close stream if timer expires
+end
+A-->E: Final order-update with delivered message
+E-->W: Dispatch final update
+W->E: close(), clear connection timer
+W->W: Show Order delivered
+end
+end
+end
+@enduml

@@ -1,0 +1,253 @@
+/* Order status page; shared typography and colors come from styles.css. */
+.status-card {
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgb(36 58 89 / 10%);
+}
+
+.status-page {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+}
+
+.status-card {
+  width: min(100%, 760px);
+  padding: clamp(24px, 5vw, 42px);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.status-card .back-link {
+  padding: 9px 16px;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #eff6ff;
+  transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.status-card .back-link:hover {
+  transform: translateY(-2px);
+  background: #dbeafe;
+  box-shadow: 0 5px 14px rgb(37 99 235 / 14%);
+}
+
+.status-card :is(.back-link, .text-button):focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+.status-card h1 {
+  font-size: 2rem;
+}
+
+.order-id-label {
+  margin: 14px 0 20px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+#order-id {
+  display: inline-block;
+  max-width: 100%;
+  color: #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+  overflow-wrap: anywhere;
+}
+
+.status-card #order-id {
+  margin: 6px 0 0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+}
+
+.connection-status {
+  margin: 0 0 26px;
+  padding: 12px 15px;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.updates-heading {
+  margin: 0 0 14px;
+  color: #1e293b;
+  font-size: 1.2rem;
+}
+
+.order-events {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#waiting-message {
+  padding: 18px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.order-event {
+  display: grid;
+  gap: 8px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--blue);
+  border-radius: 10px;
+  background: #fbfdff;
+  animation: event-arrive 220ms ease-out;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.order-event:hover,
+.order-event:focus-within {
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 8px 20px rgb(37 99 235 / 10%);
+}
+
+.status-card .text-button {
+  justify-self: center;
+  padding: 7px 12px;
+  border-radius: 6px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.status-card .text-button:hover {
+  background: #dbeafe;
+}
+
+.status-card .event-details {
+  text-align: left;
+}
+
+.order-event strong {
+  color: #1e293b;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.order-event time {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.text-button {
+  justify-self: start;
+  margin: 2px 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font-size: 0.88rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  color: var(--blue-dark);
+  text-decoration: underline;
+}
+
+.event-details {
+  margin: 4px 0 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: #eef3f9;
+  color: #334155;
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+@keyframes event-arrive {
+  from {
+    transform: translateY(5px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+.connection-status::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: middle;
+}
+
+.connection-status[data-state="connecting"]::before {
+  animation: connection-pulse 1.4s ease-in-out infinite;
+}
+
+.connection-status[data-state="connected"],
+.connection-status[data-state="delivered"] {
+  border-color: #a7f3d0;
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.connection-status[data-state="error"] {
+  border-color: #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.status-card .back-link:active,
+.status-card .text-button:active {
+  transform: translateY(1px);
+}
+
+.text-button[aria-expanded="true"] {
+  background: #dbeafe;
+  color: var(--blue-dark);
+}
+
+.event-details:not([hidden]) {
+  animation: event-arrive 180ms ease-out;
+}
+
+@keyframes connection-pulse {
+  50% { opacity: 0.3; }
+}
+
+@media (max-width: 520px) {
+  .status-card h1 { font-size: 1.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-card .back-link:hover,
+  .status-card .back-link:active,
+  .status-card .text-button:active,
+  .order-event:hover,
+  .order-event:focus-within {
+    transform: none;
+  }
+
+  .connection-status::before,
+  .order-event,
+  .event-details:not([hidden]) {
+    animation: none;
+  }
+}

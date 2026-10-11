@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1040" viewBox="0 0 1500 1040">
+<rect width="100%" height="100%" fill="white"/>
+<defs>
+<marker id="blue" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#2563eb"/></marker>
+<marker id="green" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#059669"/></marker>
+<marker id="purple" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#7c3aed"/></marker>
+</defs>
+<rect x="40" y="20" width="1420" height="45" rx="12" fill="#ffffff" stroke="#ffffff" stroke-width="2"/>
+<text x="750.0" y="51.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#172033">Order management: web client and backend</text>
+<rect x="40" y="85" width="450" height="795" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+<text x="265.0" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#172033">BROWSER + WEB SERVER</text>
+<rect x="560" y="85" width="900" height="795" rx="12" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="2"/>
+<text x="1010.0" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#172033">SPRING BOOT API :8080</text>
+<rect x="85" y="145" width="360" height="75" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="265.0" y="176.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Node.js server :5500</text>
+<text x="265.0" y="200.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Serves HTML, CSS and JavaScript</text>
+<rect x="85" y="275" width="360" height="85" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+<text x="265.0" y="311.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Order creation page</text>
+<text x="265.0" y="335.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Form + success / failure toasts</text>
+<rect x="85" y="445" width="360" height="85" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+<text x="265.0" y="481.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Order status page</text>
+<text x="265.0" y="505.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Live updates + expandable event JSON</text>
+<rect x="85" y="650" width="360" height="85" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+<text x="265.0" y="686.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Browser EventSource</text>
+<text x="265.0" y="710.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">20s connection / reconnection deadline</text>
+<rect x="635" y="275" width="740" height="85" rx="12" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+<text x="1005.0" y="311.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">OrderManagementController</text>
+<text x="1005.0" y="335.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">POST create-order / GET order-update</text>
+<rect x="635" y="445" width="340" height="85" rx="12" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+<text x="805.0" y="481.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">OrderManagementService</text>
+<text x="805.0" y="505.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Validate, assign UUID, build stage message</text>
+<rect x="1035" y="445" width="340" height="85" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="1205.0" y="481.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">orderUpdateScheduler</text>
+<text x="1205.0" y="505.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">First tick 10s; next ticks every 10s</text>
+<rect x="635" y="650" width="340" height="85" rx="12" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+<text x="805.0" y="686.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Notification manager</text>
+<text x="805.0" y="710.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">Subscribe + send updates to each client</text>
+<rect x="1035" y="650" width="340" height="85" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="1205.0" y="686.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">In-memory subscriber registry</text>
+<text x="1205.0" y="710.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">orderId → set of emitters; no replay</text>
+<rect x="635" y="785" width="740" height="65" rx="12" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+<text x="1005.0" y="811.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">One SseEmitter per connection</text>
+<text x="1005.0" y="835.1" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">120s timeout + lifecycle cleanup</text>
+<rect x="40" y="920" width="1420" height="80" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+<text x="750.0" y="953.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">CREATED → PROCESSING → READY_TO_SHIP → SHIPPED → OUT_FOR_DELIVERY → DELIVERED</text>
+<text x="750.0" y="977.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#172033">On delivery: complete streams, remove subscribers, cancel scheduled task</text>
+<path d="M 265.0,220.0 L 265.0,275.0" style="fill:none;stroke:#2563eb;stroke-width:2" /><path d="M 265.0,275.0 L 270.0,265.0 L 260.0,265.0 Z" fill="#2563eb"/>
+<rect x="302.4" y="233" width="125.2" height="20" rx="3" fill="white"/>
+<text x="365" y="248" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#2563eb">Pages and assets</text>
+<path d="M 265.0,360.0 L 265.0,445.0" style="fill:none;stroke:#2563eb;stroke-width:2" /><path d="M 265.0,445.0 L 270.0,435.0 L 260.0,435.0 Z" fill="#2563eb"/>
+<rect x="174.2" y="393" width="211.6" height="20" rx="3" fill="white"/>
+<text x="280" y="408" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#2563eb">Success: navigate after 1.8s</text>
+<path d="M 445.0,300.0 L 635.0,300.0" style="fill:none;stroke:#2563eb;stroke-width:2" /><path d="M 635.0,300.0 L 625.0,295.0 L 625.0,305.0 Z" fill="#2563eb"/>
+<rect x="499.0" y="269" width="82.0" height="20" rx="3" fill="white"/>
+<text x="540" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#2563eb">POST order</text>
+<path d="M 635.0,337.0 L 445.0,337.0" style="fill:none;stroke:#2563eb;stroke-width:2" stroke-dasharray="6 5"/><path d="M 445.0,337.0 L 455.0,342.0 L 455.0,332.0 Z" fill="#2563eb"/>
+<rect x="459.4" y="345" width="161.20000000000002" height="20" rx="3" fill="white"/>
+<text x="540" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#2563eb">202 + orderId / error</text>
+<path d="M 805.0,360.0 L 805.0,445.0" style="fill:none;stroke:#2563eb;stroke-width:2" /><path d="M 805.0,445.0 L 810.0,435.0 L 800.0,435.0 Z" fill="#2563eb"/>
+<rect x="825.4" y="390" width="89.2" height="20" rx="3" fill="white"/>
+<text x="870" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#2563eb">createOrder</text>
+<path d="M 975.0,473.0 L 1035.0,473.0" style="fill:none;stroke:#7c3aed;stroke-width:2" /><path d="M 1035.0,473.0 L 1025.0,468.0 L 1025.0,478.0 Z" fill="#7c3aed"/>
+<rect x="971.2" y="441" width="67.6" height="20" rx="3" fill="white"/>
+<text x="1005" y="456" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#7c3aed">Schedule</text>
+<path d="M 1035.0,507.0 L 975.0,507.0" style="fill:none;stroke:#7c3aed;stroke-width:2" stroke-dasharray="6 5"/><path d="M 975.0,507.0 L 985.0,512.0 L 985.0,502.0 Z" fill="#7c3aed"/>
+<rect x="985.6" y="514" width="38.8" height="20" rx="3" fill="white"/>
+<text x="1005" y="529" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#7c3aed">Tick</text>
+<path d="M 805.0,530.0 L 805.0,650.0" style="fill:none;stroke:#059669;stroke-width:2" /><path d="M 805.0,650.0 L 810.0,640.0 L 800.0,640.0 Z" fill="#059669"/>
+<rect x="824.0" y="578" width="82.0" height="20" rx="3" fill="white"/>
+<text x="865" y="593" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#059669">sendUpdate</text>
+<path d="M 265.0,530.0 L 265.0,650.0" style="fill:none;stroke:#2563eb;stroke-width:2" /><path d="M 265.0,650.0 L 270.0,640.0 L 260.0,640.0 Z" fill="#2563eb"/>
+<rect x="197.2" y="571" width="175.6" height="20" rx="3" fill="white"/>
+<text x="285" y="586" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#2563eb">Subscribe using orderId</text>
+<path d="M 445.0,680.0 L 530.0,680.0 L 530.0,390.0 L 1205.0,390.0 L 1205.0,360.0" style="fill:none;stroke:#2563eb;stroke-width:2" /><path d="M 1205.0,360.0 L 1200.0,370.0 L 1210.0,370.0 Z" fill="#2563eb"/>
+<rect x="1124.6" y="367" width="110.8" height="20" rx="3" fill="white"/>
+<text x="1180" y="382" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#2563eb">GET SSE stream</text>
+<path d="M 635.0,317.0 L 595.0,317.0 L 595.0,625.0 L 665.0,625.0 L 665.0,650.0" style="fill:none;stroke:#2563eb;stroke-width:2" /><path d="M 665.0,650.0 L 670.0,640.0 L 660.0,640.0 Z" fill="#2563eb"/>
+<rect x="581.6" y="599" width="146.8" height="20" rx="3" fill="white"/>
+<text x="655" y="614" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#2563eb">subscriber(orderId)</text>
+<path d="M 975.0,692.0 L 1035.0,692.0" style="fill:none;stroke:#7c3aed;stroke-width:2" /><path d="M 1035.0,692.0 L 1025.0,687.0 L 1025.0,697.0 Z" fill="#7c3aed"/>
+<rect x="1118.8" y="747" width="132.4" height="20" rx="3" fill="white"/>
+<text x="1185" y="762" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#7c3aed">Register / lookup</text>
+<path d="M 805.0,735.0 L 805.0,785.0" style="fill:none;stroke:#059669;stroke-width:2" /><path d="M 805.0,785.0 L 810.0,775.0 L 800.0,775.0 Z" fill="#059669"/>
+<rect x="833.2" y="751" width="103.60000000000001" height="20" rx="3" fill="white"/>
+<text x="885" y="766" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#059669">Create + send</text>
+<path d="M 635.0,817.0 L 475.0,817.0 L 475.0,712.0 L 445.0,712.0" style="fill:none;stroke:#059669;stroke-width:2" /><path d="M 445.0,712.0 L 455.0,717.0 L 455.0,707.0 Z" fill="#059669"/>
+<rect x="480.8" y="825" width="132.4" height="20" rx="3" fill="white"/>
+<text x="547" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#059669">order-update JSON</text>
+<path d="M 85.0,692.0 L 60.0,692.0 L 60.0,487.0 L 85.0,487.0" style="fill:none;stroke:#059669;stroke-width:2" stroke-dasharray="6 5"/><path d="M 85.0,487.0 L 75.0,482.0 L 75.0,492.0 Z" fill="#059669"/>
+<rect x="114.6" y="605" width="110.8" height="20" rx="3" fill="white"/>
+<text x="170" y="620" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#059669">Render updates</text>
+<path d="M 1250.0,785.0 L 1250.0,735.0" style="fill:none;stroke:#7c3aed;stroke-width:2" stroke-dasharray="6 5"/><path d="M 1250.0,735.0 L 1245.0,745.0 L 1255.0,745.0 Z" fill="#7c3aed"/>
+<rect x="1279.8" y="760" width="60.4" height="20" rx="3" fill="white"/>
+<text x="1310" y="775" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#7c3aed">Cleanup</text>
+</svg>

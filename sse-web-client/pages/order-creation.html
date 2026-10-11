@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create an Order</title>
+    <link rel="stylesheet" href="/src/styles.css">
+    <script src="/src/order-creation.js" defer></script>
+  </head>
+  <body class="order-page">
+    <main class="page-card">
+      <a class="back-link" href="/">Home</a>
+      <p class="eyebrow">Order management</p>
+      <h1>Create an order</h1>
+      <p class="page-intro">Enter the order details below to get started.</p>
+
+      <form id="order-form">
+        <div class="form-field">
+          <label for="item-name">Item name</label>
+          <input id="item-name" name="itemName" type="text" placeholder="e.g. Wireless headphones" required>
+        </div>
+        <div class="form-field">
+          <label for="quantity">Quantity</label>
+          <input id="quantity" name="quantity" type="number" min="1" step="1" placeholder="1" required>
+        </div>
+        <div class="form-field">
+          <label for="address">Delivery address</label>
+          <textarea id="address" name="address" rows="3" placeholder="Street, city, postal code" required></textarea>
+        </div>
+        <button id="submit-order" class="primary-button" type="submit">Create order</button>
+      </form>
+
+      <p id="result" class="form-result" role="status" aria-live="polite"></p>
+    </main>
+    <aside id="order-toast" class="order-toast" hidden>
+      <p id="toast-message" role="status" aria-live="polite" aria-atomic="true"></p>
+      <button id="dismiss-toast" type="button" aria-label="Dismiss notification">&times;</button>
+    </aside>
+  </body>
+</html>

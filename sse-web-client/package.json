@@ -1,0 +1,13 @@
+{
+  "name": "sse-web-client",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Node.js-hosted browser client for exploring Server-Sent Events",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

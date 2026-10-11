@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Order status</title>
+    <link rel="stylesheet" href="/src/styles.css">
+    <link rel="stylesheet" href="/src/order-status.css">
+    <script src="/src/order-status.js" defer></script>
+  </head>
+  <body class="status-page">
+    <main class="status-card">
+      <a class="back-link" href="/orders">Create another order</a>
+      <p class="eyebrow">Order management</p>
+      <h1>Order status</h1>
+      <p class="order-id-label">Order ID <strong id="order-id"></strong></p>
+      <p id="connection-status" class="connection-status" data-state="connecting" role="status" aria-live="polite">
+        Connecting to order updates...
+      </p>
+      <h2 class="updates-heading">Live updates</h2>
+      <ol id="order-events" class="order-events" aria-live="polite" aria-relevant="additions">
+        <li id="waiting-message">Waiting for the first order update.</li>
+      </ol>
+    </main>
+  </body>
+</html>

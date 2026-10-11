@@ -1,0 +1,77 @@
+@startuml
+title Backend order processing and SSE subscriptions
+hide footbox
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 13
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 180
+skinparam sequence {
+  ArrowColor #2563EB
+  LifeLineBorderColor #94A3B8
+  ParticipantBorderColor #2563EB
+  ParticipantBackgroundColor #EFF6FF
+  GroupBorderColor #94A3B8
+  GroupBackgroundColor #F8FAFC
+}
+autonumber
+participant "Browser" as B
+participant "OrderManagementController" as C
+participant "OrderManagementService" as S
+participant "orderUpdateScheduler" as Q
+participant "OrderUpdateEventNotificationManager" as M
+participant "In-memory subscriber registry" as R
+participant "Per-client SseEmitter" as E
+B->C: POST /api/v1/create-order
+alt Quantity exceeds 100
+C-->B: 400 Bad Request
+else Quantity passes controller check
+C->S: createOrder(request)
+S->S: Validate item, address, positive quantity
+alt Service validation fails
+S-->C: ResponseStatusException (400)
+C-->B: 400 Bad Request
+else Valid order
+S->S: Generate UUID orderId
+S->Q: scheduleAtFixedRate(task, 10s delay, 10s period)
+S-->C: orderId
+C-->B: 202 Accepted + orderId
+end
+end
+note over B,E: Following flow applies to an accepted order
+B->C: GET /api/v1/event/order-update?orderId=...
+C->M: subscriber(orderId)
+M->E: Create SseEmitter(120000 ms)
+M->R: Add emitter to set for orderId
+M->E: Register completion, timeout, error cleanup
+M-->C: SseEmitter
+C-->B: Long-lived text/event-stream response
+loop Six stages, starting at 10s and then every 10s
+Q->S: Run scheduled task, select next OrderStage
+S->M: sendUpdate(orderId, stage, message)
+M->R: Find active subscribers for orderId
+alt No subscribers
+M->M: Log, skip sending, workflow continues
+else Subscribers available
+loop Each subscribed emitter
+M->E: send(id, event=order-update, JSON payload)
+E-->B: Stream event to this client
+opt Send throws IOException or RuntimeException
+M->R: Remove failed emitter
+M->E: completeWithError(error)
+end
+end
+opt Stage is DELIVERED
+M->E: complete() remaining emitters
+M->R: Remove order subscription entry
+end
+end
+opt Stage is DELIVERED
+S->Q: Cancel scheduled task
+end
+end
+opt Emitter completes, times out, or errors
+E->M: Lifecycle callback
+M->R: Remove emitter, remove empty order entry
+end
+@enduml

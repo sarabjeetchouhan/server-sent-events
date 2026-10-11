@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Learn Server-Sent Events (SSE) with practical Spring Boot and Java examples. Explore browser EventSource connections, live order updates, and reconnection."
+    >
+    <meta name="theme-color" content="#f2f6fb">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Server-Sent Events (SSE) with Spring Boot">
+    <meta
+      property="og:description"
+      content="A practical guide to SSE with Spring Boot, Java, browser EventSource, and live order update examples."
+    >
+    <title>Server-Sent Events (SSE) with Spring Boot | Practical Guide</title>
+    <link rel="stylesheet" href="/src/styles.css">
+  </head>
+  <body>
+    <main class="page-card guide-home">
+      <p class="eyebrow">Java · Spring Boot · Browser EventSource</p>
+      <h1>Server-Sent Events (SSE), explained with working examples</h1>
+      <p class="page-intro">
+        Learn how Server-Sent Events stream live updates from a Spring Boot
+        server to a browser. Explore a basic event stream and follow an order
+        from creation through delivery.
+      </p>
+
+      <nav class="example-links" aria-label="SSE examples">
+        <a class="example-link" href="/pages/basic.html">
+          <strong>Basic SSE stream</strong>
+          <span>Connect with the browser EventSource API and inspect named events.</span>
+        </a>
+        <a class="example-link" href="/orders">
+          <strong>Order updates with SSE</strong>
+          <span>Create an order, subscribe by order ID, and watch its live status.</span>
+        </a>
+      </nav>
+
+      <section class="guide-section" aria-labelledby="sse-overview">
+        <h2 id="sse-overview">What are Server-Sent Events?</h2>
+        <p>
+          Server-Sent Events (SSE) are a browser-supported way for a server to
+          send data to a client over a long-lived HTTP connection. SSE is
+          unidirectional: the browser opens the connection and the server
+          streams events. The browser's native <code>EventSource</code> API
+          handles event dispatch and automatic reconnection.
+        </p>
+        <p>
+          SSE is useful for notifications, dashboards, progress indicators,
+          streaming responses, and real-time order tracking. Use WebSockets
+          instead when the client and server both need to send frequent messages
+          over the same connection.
+        </p>
+      </section>
+
+      <section class="guide-section" aria-labelledby="spring-example">
+        <h2 id="spring-example">Spring Boot SSE endpoint</h2>
+        <p>
+          This project uses Spring MVC's <code>SseEmitter</code> to keep an HTTP
+          response open and send events. Run the backend, then try the stream
+          with curl:
+        </p>
+        <pre><code>curl -N -H 'Accept: text/event-stream' \
+  http://localhost:8080/api/stream</code></pre>
+        <p>
+          The endpoint sends ten named <code>notification</code> events with
+          incrementing IDs and JSON payloads. The order example uses a separate
+          named <code>order-update</code> event for each order subscription.
+        </p>
+      </section>
+
+      <section class="guide-section" aria-labelledby="learn-more">
+        <h2 id="learn-more">Learn more about SSE</h2>
+        <p>
+          The repository's <a href="https://github.com/sarabjeetchouhan/server-sent-events">README and SSE guide</a>
+          cover the event format, reconnect behavior, Spring MVC implementation,
+          scaling considerations, and production checklist.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
